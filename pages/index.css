@@ -84,7 +84,7 @@
 .cards {
 }
 
-.card__list {
+.cards__list {
 	padding: 0;
 	display: grid;
 	justify-content: center;
