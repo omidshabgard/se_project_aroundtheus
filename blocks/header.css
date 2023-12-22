@@ -1,0 +1,16 @@
+.header {
+	padding-top: 45px;
+	max-width: 880px;
+   margin: 0 auto;
+}
+
+.header__img {
+	margin-bottom: 41px;
+}
+
+.header__line {
+	opacity: 0.7;
+	height: 1px;
+	background: #545454;
+	margin-bottom: 36.25px;
+}

@@ -1,0 +1,32 @@
+.card {
+	display: flex;
+	flex-direction: column;
+	border-radius: 10px;
+	overflow: hidden;
+	width: 282px;
+}
+
+.card__image {
+	height: 282px;
+}
+
+.card__description {
+	display: flex;
+	align-items: center;
+	background: white;
+	color: black;
+	padding: 25px 20px;
+}
+
+.card__like-button {
+	background: transparent url(../images/like-icon.svg) center no-repeat;
+	height: 18px;
+	width: 21px;
+	margin-left: auto;
+	border: none;
+	cursor: pointer;
+}
+
+.card__like-button:hover {
+	background: transparent url(../images/like-icon-hover.svg) center no-repeat;
+}
