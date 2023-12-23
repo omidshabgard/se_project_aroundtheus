@@ -3,22 +3,34 @@
 	flex-direction: column;
 	border-radius: 10px;
 	overflow: hidden;
-	width: 282px;
+	max-width: 282px;
+	width: 100%;
 }
 
 .card__image {
 	height: 282px;
+	object-fit: cover;
 }
 
 .card__description {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
+	gap: 2px;
 	background: white;
 	color: black;
 	padding: 25px 20px;
 }
 
+.card__title {
+	margin: 0;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
 .card__like-button {
+	flex: 0 0 auto;
 	background: transparent url(../images/like-icon.svg) center no-repeat;
 	height: 18px;
 	width: 21px;
@@ -28,5 +40,5 @@
 }
 
 .card__like-button:hover {
-	background: transparent url(../images/like-icon-hover.svg) center no-repeat;
+	opacity: 0.5;
 }

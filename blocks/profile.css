@@ -9,6 +9,7 @@
 	width: 120px;
 	height: 120px;
 	border-radius: 50%;
+	object-fit: cover;
 }
 
 .profile__info {
@@ -16,7 +17,7 @@
 	grid-template-areas:
 		'title button'
 		'description description';
-	grid-template-columns: minmax(auto, 1fr) auto;
+	grid-template-columns: 2fr 1fr;
 	align-items: center;
 	gap: 10px 20px;
 }
@@ -27,22 +28,22 @@
 	font-weight: 500;
 	line-height: 48px;
 	margin: 0;
-   text-overflow: ellipsis;
-   white-space: nowrap;
-   overflow: hidden;
-   max-width: 400px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 .profile__description {
-   grid-area: description;
+	grid-area: description;
 	font-size: 18px;
 	line-height: 22px;
 	font-weight: 400;
 	margin: 0;
-   text-overflow: ellipsis;
-   white-space: nowrap;
-   overflow: hidden;
-   max-width: 400px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	width: 100%;
+	max-width: 28vw;
 }
 
 .profile__edit-button {
@@ -55,8 +56,7 @@
 }
 
 .profile__edit-button:hover {
-	border-color: #545454;
-	background: transparent url(../images/edit-icon-hover.svg) center no-repeat;
+	opacity: 0.6;
 }
 
 .profile__add-button {
@@ -66,25 +66,21 @@
 	margin-left: auto;
 	border: white 2px solid;
 	cursor: pointer;
+	flex: 0 0 auto;
 }
 
 .profile__add-button:hover {
-	border-color: #545454;
-	background: transparent url(../images/add-icon-hover.svg) center no-repeat;
+	opacity: 0.6;
 }
 
-@media screen and (max-width: 790px) {
+@media screen and (max-width: 990px) {
 	.profile__title {
 		font-size: 32px;
 		line-height: 38.63px;
 	}
-
-	.profile__add-button {
-		width: 50px;
-	}
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 520px) {
 	.profile {
 		margin-top: 42px;
 		margin-bottom: 36px;
@@ -102,11 +98,17 @@
 	.profile__title {
 		font-size: 22px;
 		line-height: 26.63px;
+		max-width: 70vw;
 	}
 
 	.profile__description {
-		width: 100%;
+		font-size: 14px;
 		text-align: center;
+	}
+
+	.profile__edit-button {
+		height: 18px;
+		width: 18px;
 	}
 
 	.profile__add-button {
