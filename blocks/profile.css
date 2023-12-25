@@ -17,9 +17,9 @@
 	grid-template-areas:
 		'title button'
 		'description description';
-	grid-template-columns: 2fr 1fr;
+	grid-template-columns: 6fr 1fr;
 	align-items: center;
-	gap: 10px 20px;
+	gap: 10px;
 }
 
 .profile__title {
@@ -88,22 +88,16 @@
 		gap: 30px;
 	}
 
-	.profile__info {
-		display: flex;
-		justify-content: center;
-		gap: 10px;
-		flex-wrap: wrap;
-	}
-
 	.profile__title {
 		font-size: 22px;
 		line-height: 26.63px;
-		max-width: 70vw;
+		max-width: 60vw;
 	}
 
 	.profile__description {
 		font-size: 14px;
 		text-align: center;
+		justify-self: center;
 	}
 
 	.profile__edit-button {

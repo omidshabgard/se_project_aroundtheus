@@ -2,15 +2,11 @@
 	background-color: #000;
 	font-family: 'Inter', Arial, Helvetica, sans-serif;
 	color: white;
-	padding-left: 19px;
-	padding-right: 19px;
 }
 
 .page__content {
 	background-color: black;
 	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
 }
 
 .page__section {

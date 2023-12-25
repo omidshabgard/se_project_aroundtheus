@@ -2,7 +2,7 @@
 	max-width: 880px;
 	margin: 0 auto;
 	margin-top: 67px;
-	padding-bottom: 60px;
+	margin-bottom: 60px;
 }
 
 .footer__copyright {
@@ -12,11 +12,14 @@
 	font-style: normal;
 	font-weight: 400;
 	line-height: normal;
+	margin: 0;
 }
 
 @media screen and (max-width: 520px) {
 	.footer {
 		margin-top: 48px;
+		margin-bottom: 26px;
+		padding: 0 19px;
 	}
 
 	.footer__copyright {
