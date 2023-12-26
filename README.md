@@ -17,6 +17,9 @@ This project is made so all the elements are displayed correctly on popular scre
 **Github pages**  
 
 * [Link to github pages](https://omidshabgard.github.io/se_project_aroundtheus/)
+
+**google drive**
+[Recorded File] (https://drive.google.com/file/d/1ELooScvmL1nPJMRiBH1f8P-Sch-mG3fm/view?usp=share_link)
   
 **Images**  
   
