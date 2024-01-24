@@ -40,74 +40,7 @@
         </section>
 
         <section class="gallery page__section">
-          <ul class="gallery__cards">
-            <li class="card">
-              <img
-                src="./images/image-2.png"
-                alt="Yosemite Valley image"
-                class="card__image"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Yosemite Valley</h2>
-                <button class="card__like-button" type="button"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src="./images/image-3.png"
-                alt="Lake Louise image"
-                class="card__image"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Lake Louise</h2>
-                <button class="card__like-button"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src="./images/image-4.png"
-                alt="Bald Mountains image"
-                class="card__image"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Bald Mountains</h2>
-                <button class="card__like-button"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src="./images/image-5.png"
-                alt="Latemar image"
-                class="card__image"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Latemar</h2>
-                <button class="card__like-button"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src="./images/image-6.png"
-                alt="Vanois National image"
-                class="card__image"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Vanois National</h2>
-                <button class="card__like-button"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src="./images/image-7.png"
-                alt="Lago di Braies image"
-                class="card__image"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Lago di Braies</h2>
-                <button class="card__like-button"></button>
-              </div>
-            </li>
-          </ul>
+          <ul class="gallery__cards"></ul>
         </section>
       </main>
 
@@ -134,6 +67,16 @@
         </form>
       </div>
     </div>
+
+    <template id="templateCard">
+      <li class="card">
+        <img src="" alt="" class="card__image" />
+        <div class="card__description">
+          <h2 class="card__title"></h2>
+          <button class="card__like-button"></button>
+        </div>
+      </li>
+    </template>
     <script src="./scripts/index.js"></script>
   </body>
 </html>

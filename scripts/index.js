@@ -28,25 +28,57 @@ const initialCards = [{
 const profileEditButton = document.querySelector('#profile__edit-button');
 const profileEditModal = document.querySelector('#profile-edit-modal');
 const editProfileCloseBtn = document.querySelector('#modal__close');
-
-
-profileEditButton.addEventListener('click', () => {
-    profileEditModal.classList.add('modal_opened');
-});
-
-editProfileCloseBtn.addEventListener('click', () => {
-    profileEditModal.classList.remove('modal_opened');
-
-})
-
 const titleInputElement = document.querySelector('.modal__input.modal__input-title');
 const descriptionInputElement = document.querySelector('.modal__input.modal__input-description');
 const profileTitleElement = document.querySelector('.profile__title');
 const profileDescriptionElement = document.querySelector('.profile__description');
+const profileEditForm = profileEditModal.querySelector('.modal__form');
+const templateCard = document.querySelector("#templateCard").content.firstElementChild;
+const galleryCardsElement = document.querySelector(".gallery__cards");
 
-titleInputElement.value = profileTitleElement.textContent;
-descriptionInputElement.value = profileDescriptionElement.textContent;
 
+function closePopop(){
+    profileEditModal.classList.remove('modal_opened');
+}
+
+profileEditButton.addEventListener('click', () => {
+    titleInputElement.value = profileTitleElement.textContent;
+    descriptionInputElement.value = profileDescriptionElement.textContent;
+    profileEditModal.classList.add('modal_opened');
+});
+
+editProfileCloseBtn.addEventListener('click', () => {
+    closePopop();
+});
+
+profileEditForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    profileTitleElement.textContent = titleInputElement.value;
+    profileDescriptionElement.textContent = descriptionInputElement.value;
+    closePopop();
+});
+
+const getCardElement = (cardData) => {
+    // clone the template 
+    const clonedCardElement = templateCard.cloneNode(true);
+    // get the image element 
+    const imageElement = clonedCardElement.querySelector(".card__image");
+    // update src and alt of iamge  
+    imageElement.src = cardData.link; 
+    imageElement.alt = cardData.name;
+
+    // get the title element 
+    const titleElement = clonedCardElement.querySelector(".card__title");
+    // change the title 
+    titleElement.textContent = cardData.name;
+    return clonedCardElement;
+    
+}
+
+initialCards.forEach((card) => {
+    const cardElement = getCardElement(card);
+    galleryCardsElement.appendChild(cardElement);
+});
 
 
 
