@@ -50,20 +50,22 @@
     </div>
     <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
-        <button class="modal__close" id="modal__close"></button>
-        <p class="modal__heading">Edit Profile</p>
-        <form class="modal__form">
+        <button class="modal__close" id="modal__close" type="button"></button>
+        <h2 class="modal__heading">Edit Profile</h2>
+        <form class="modal__form" name="profile">
           <input
             type="text"
             name="title"
-            class="modal__input modal__input-title"
+            class="modal__input"
+            id="profile-title-input"
           />
           <input
             type="text"
             name="description"
-            class="modal__input modal__input-description"
+            class="modal__input"
+            id="profile-description-input"
           />
-          <button class="modal__button">Save</button>
+          <button class="modal__button" type="submit">Save</button>
         </form>
       </div>
     </div>
@@ -73,7 +75,7 @@
         <img src="" alt="" class="card__image" />
         <div class="card__description">
           <h2 class="card__title"></h2>
-          <button class="card__like-button"></button>
+          <button class="card__like-button" type="button"></button>
         </div>
       </li>
     </template>

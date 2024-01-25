@@ -31,12 +31,14 @@
 
 .card__like-button {
 	flex: 0 0 auto;
-	background: transparent url(../images/like-icon.svg) center no-repeat;
+	background: transparent url(../images/like-icon.svg) center no-repeat; 
 	height: 18px;
 	width: 21px;
 	margin-left: auto;
 	border: none;
 	cursor: pointer;
+	transition: opacity 300ms;
+
 }
 
 .card__like-button:hover {

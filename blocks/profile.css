@@ -67,6 +67,7 @@
 	border: white 2px solid;
 	cursor: pointer;
 	flex: 0 0 auto;
+	border-radius: 2px;;
 }
 
 .profile__add-button:hover {
@@ -103,12 +104,14 @@
 	.profile__edit-button {
 		height: 18px;
 		width: 18px;
+		background-size: 7.5px;
 	}
 
 	.profile__add-button {
 		margin-top: 6px;
 		margin-left: 0;
 		width: 282px;
+		background-size: 16px;
 		/* cursor: pointer; */
 	}
 }
