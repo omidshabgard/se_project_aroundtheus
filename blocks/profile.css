@@ -53,6 +53,7 @@
 	width: 24px;
 	border: white 1px solid;
 	cursor: pointer;
+	transition: opacity 300ms;
 }
 
 .profile__edit-button:hover {
@@ -67,7 +68,8 @@
 	border: white 2px solid;
 	cursor: pointer;
 	flex: 0 0 auto;
-	border-radius: 2px;;
+	border-radius: 2px;
+	transition: opacity 300ms;
 }
 
 .profile__add-button:hover {
