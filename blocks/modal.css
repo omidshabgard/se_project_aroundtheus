@@ -106,7 +106,6 @@
   .modal__close {
     width: 26px;
     height: 26px;
-    padding: 0 19px;
     right: 0px;
     left: auto;
     bottom: calc(100% + 13.62px);
@@ -127,4 +126,3 @@
     padding: 14px 0;
   }
 }
-
