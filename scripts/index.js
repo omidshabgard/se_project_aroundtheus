@@ -123,6 +123,7 @@ function handleAddCardFormSubmit(e) {
 	};
 	const cardElement = getCardElement(cardData);
 	galleryCardsElement.prepend(cardElement);
+	e.target.reset();
 	closeAddPlaceModal();
 }
 

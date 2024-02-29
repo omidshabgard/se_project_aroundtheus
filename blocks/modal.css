@@ -127,7 +127,22 @@
 	}
 }
 
+.image-modal__container {
+	position: relative;
+	margin: auto;
+	box-sizing: border-box;
+}
+
 .modal__image {
 	max-width: 75vw;
-	max-height: 75vw;
+	max-height: 75vh;
+}
+
+.image-modal__container .modal__caption {
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 15px;
+	letter-spacing: 0em;
+	text-align: left;
+	color: #ffffff;
 }
