@@ -51,7 +51,9 @@ const templateCard =
 profileEditButton.addEventListener('click', openEditProfileModal);
 editProfileCloseBtn.addEventListener('click', closeEditProfileModal);
 profileEditForm.addEventListener('submit', handleEditProfileFormSubmit);
-
+const profileEditContainer = profileEditModal.querySelector(".modal__container");
+profileEditModal.addEventListener("click", () => closeModal (profileEditModal));
+profileEditContainer.addEventListener("click", (evt) => evt.stopPropagation());
 //----------------------------------------------------------------------------------//
 //--------------reusable methods for edit profile modal EDIT PROFILE----------------//
 //----------------------------------------------------------------------------------//
@@ -94,6 +96,13 @@ cardAddButtonElement.addEventListener('click', openAddPlaceModal);
 cardAddCloseBtn.addEventListener('click', closeAddPlaceModal);
 cardAddForm.addEventListener('submit', handleAddCardFormSubmit);
 imageModalCloseBtn.addEventListener('click', cloaseImageModal);
+const cardAddContainer = cardAddModal.querySelector(".modal__container");
+cardAddModal.addEventListener("click", () => closeModal (cardAddModal));
+cardAddContainer.addEventListener("click", (evt) => evt.stopPropagation());
+
+const imageContainer = imageModal.querySelector(".image-modal__container");
+imageModal.addEventListener("click", () => closeModal (imageModal));
+imageContainer.addEventListener("click", (evt) => evt.stopPropagation());
 
 initialCards.forEach((card) => {
 	const cardElement = getCardElement(card);
@@ -175,3 +184,5 @@ function openModal(modal) {
 function closeModal(modal) {
 	modal.classList.remove('modal_opened');
 }
+
+
