@@ -127,10 +127,12 @@
 	}
 }
 
+
 .image-modal__container {
 	position: relative;
 	margin: auto;
 	box-sizing: border-box;
+
 }
 
 .modal__image {

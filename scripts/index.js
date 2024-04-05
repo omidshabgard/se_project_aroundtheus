@@ -186,3 +186,12 @@ function closeModal(modal) {
 }
 
 
+document.addEventListener("keydown", (evt) => {
+	const isScapeKeyPressed = evt.key === "Escape";
+	if(isScapeKeyPressed){
+		closeModal(profileEditModal);
+		closeModal(cardAddModal);
+		closeModal(imageModal);
+	}
+
+})
