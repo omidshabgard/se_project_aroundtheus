@@ -51,9 +51,10 @@ const templateCard =
 profileEditButton.addEventListener('click', openEditProfileModal);
 editProfileCloseBtn.addEventListener('click', closeEditProfileModal);
 profileEditForm.addEventListener('submit', handleEditProfileFormSubmit);
-const profileEditContainer = profileEditModal.querySelector(".modal__container");
-profileEditModal.addEventListener("click", () => closeModal (profileEditModal));
-profileEditContainer.addEventListener("click", (evt) => evt.stopPropagation());
+const profileEditContainer =
+	profileEditModal.querySelector('.modal__container');
+profileEditModal.addEventListener('click', () => closeModal(profileEditModal));
+profileEditContainer.addEventListener('click', (evt) => evt.stopPropagation());
 //----------------------------------------------------------------------------------//
 //--------------reusable methods for edit profile modal EDIT PROFILE----------------//
 //----------------------------------------------------------------------------------//
@@ -96,13 +97,13 @@ cardAddButtonElement.addEventListener('click', openAddPlaceModal);
 cardAddCloseBtn.addEventListener('click', closeAddPlaceModal);
 cardAddForm.addEventListener('submit', handleAddCardFormSubmit);
 imageModalCloseBtn.addEventListener('click', cloaseImageModal);
-const cardAddContainer = cardAddModal.querySelector(".modal__container");
-cardAddModal.addEventListener("click", () => closeModal (cardAddModal));
-cardAddContainer.addEventListener("click", (evt) => evt.stopPropagation());
+const cardAddContainer = cardAddModal.querySelector('.modal__container');
+cardAddModal.addEventListener('click', () => closeModal(cardAddModal));
+cardAddContainer.addEventListener('click', (evt) => evt.stopPropagation());
 
-const imageContainer = imageModal.querySelector(".image-modal__container");
-imageModal.addEventListener("click", () => closeModal (imageModal));
-imageContainer.addEventListener("click", (evt) => evt.stopPropagation());
+const imageContainer = imageModal.querySelector('.image-modal__container');
+imageModal.addEventListener('click', () => closeModal(imageModal));
+imageContainer.addEventListener('click', (evt) => evt.stopPropagation());
 
 initialCards.forEach((card) => {
 	const cardElement = getCardElement(card);
@@ -179,19 +180,19 @@ function getCardElement(cardData) {
 //------------------------------------------------//
 function openModal(modal) {
 	modal.classList.add('modal_opened');
+	document.addEventListener('keydown', closeModalWithEscapeKey);
 }
 
 function closeModal(modal) {
 	modal.classList.remove('modal_opened');
+	document.removeEventListener('keydown', closeModalWithEscapeKey);
 }
 
+function closeModalWithEscapeKey(evt) {
+	const isScapeKeyPressed = evt.key === 'Escape';
+	if (isScapeKeyPressed) {
+		const openedPopup = document.querySelector('.modal_opened');
 
-document.addEventListener("keydown", (evt) => {
-	const isScapeKeyPressed = evt.key === "Escape";
-	if(isScapeKeyPressed){
-		closeModal(profileEditModal);
-		closeModal(cardAddModal);
-		closeModal(imageModal);
+		closeModal(openedPopup);
 	}
-
-})
+}
