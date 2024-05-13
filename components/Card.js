@@ -25,6 +25,7 @@ export class Card {
 		imageElement.addEventListener('click', this._handleImageClick);
 	}
 
+	
 	getView() {
 		this._cardElement = document
 			.querySelector(this._cardSelector)

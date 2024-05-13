@@ -161,6 +161,7 @@ function getCardElement(cardData) {
 //------------------------------------------------//
 //--------------reusable methods------------------//
 //------------------------------------------------//
+
 function openModal(modal) {
 	modal.classList.add('modal_opened');
 	document.addEventListener('keydown', closeModalWithEscapeKey);
@@ -183,6 +184,7 @@ function closeModalWithEscapeKey(evt) {
 //------------------------------------------------//
 //--------------FormValidation------------------//
 //------------------------------------------------//
+
 
 const config = {
 	formSelector: '.modal__form',
