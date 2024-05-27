@@ -4,7 +4,6 @@ export class Card {
 		this._link = data.link;
 		this._cardSelector = cardSelector;
 		this._handleImageClick = handleImageClick;
-		
 	}
 	_setEventListeners() {
 		const likeButtonElement = this._cardElement.querySelector(
@@ -25,7 +24,6 @@ export class Card {
 		imageElement.addEventListener('click', this._handleImageClick);
 	}
 
-	
 	getView() {
 		this._cardElement = document
 			.querySelector(this._cardSelector)
@@ -51,6 +49,6 @@ export class Card {
 	}
 	_handleDeleteButton() {
 		this._cardElement.remove();
+		this._cardElement = null;
 	}
 }
-
