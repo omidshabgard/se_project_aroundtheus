@@ -60,16 +60,18 @@ class FormValidator {
 	}
 
 	enableValidation() {
+		this._buttonElement = this._form.querySelector(
+			this._submitButtonSelector
+		);
 		this._form.addEventListener('submit', (evt) => {
 			evt.preventDefault();
+			this._buttonElement.classList.add('modal__button_disabled');
+			this._buttonElement.disabled = true;
+			evt.target.reset();
 		});
 
 		this._inputList = Array.from(
 			this._form.querySelectorAll(this._inputSelector)
-		);
-
-		this._buttonElement = this._form.querySelector(
-			this._submitButtonSelector
 		);
 
 		this._setEventListeners();
