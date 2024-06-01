@@ -135,10 +135,8 @@ function handleAddCardFormSubmit(e) {
 	const cardElement = getCardElement(cardData);
 	galleryCardsElement.prepend(cardElement);
 	e.target.reset();
-	const submitButton = e.target.querySelector('.modal__button');
-	submitButton.classList.add('modal__button_disabled');
-	submitButton.disabled = true;
-
+	
+	
 	closeAddPlaceModal();
 }
 

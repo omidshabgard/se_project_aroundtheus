@@ -51,7 +51,15 @@ class FormValidator {
 	}
 
 	_setEventListeners() {
+		this._inputList = Array.from(
+			this._form.querySelectorAll(this._inputSelector)
+		);
+		this._buttonElement = this._form.querySelector(
+			this._submitButtonSelector
+		);
+
 		this._inputList.forEach((inputElement) => {
+			
 			inputElement.addEventListener('input', () => {
 				this._checkInputValidity(this._form, inputElement);
 				this._toggleButtonState();
@@ -60,19 +68,13 @@ class FormValidator {
 	}
 
 	enableValidation() {
-		this._buttonElement = this._form.querySelector(
-			this._submitButtonSelector
-		);
 		this._form.addEventListener('submit', (evt) => {
 			evt.preventDefault();
-			this._buttonElement.classList.add('modal__button_disabled');
-			this._buttonElement.disabled = true;
+			this._toggleButtonState();
 			evt.target.reset();
+			
+			
 		});
-
-		this._inputList = Array.from(
-			this._form.querySelectorAll(this._inputSelector)
-		);
 
 		this._setEventListeners();
 	}
