@@ -1,5 +1,6 @@
 import { Card } from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
 const initialCards = [
 	{
 		name: 'Yosemite Valley',
@@ -107,10 +108,17 @@ const imageContainer = imageModal.querySelector('.image-modal__container');
 imageModal.addEventListener('click', () => closeModal(imageModal));
 imageContainer.addEventListener('click', (evt) => evt.stopPropagation());
 
-initialCards.forEach((data) => {
-	const cardElement = getCardElement(data);
-	galleryCardsElement.appendChild(cardElement);
-});
+const cardSection = new Section(
+	{
+		items: initialCards,
+		renderer: (data) => {
+			const cardElement = getCardElement(data);
+			cardSection.addItem(cardElement);
+		},
+	},
+	'.gallery__cards'
+);
+cardSection.renderItems();
 
 //------------------------------------------------------------------------------------//
 //--------------reusable methods for ADD PLACE CARD-----------------------------------//
@@ -135,8 +143,7 @@ function handleAddCardFormSubmit(e) {
 	const cardElement = getCardElement(cardData);
 	galleryCardsElement.prepend(cardElement);
 	e.target.reset();
-	
-	
+
 	closeAddPlaceModal();
 }
 
