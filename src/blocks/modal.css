@@ -18,7 +18,7 @@
 	opacity: 1;
 }
 
-.modal__container {
+.modal__content {
 	position: relative;
 	padding: 36px;
 	padding-bottom: 36.51px;
@@ -51,7 +51,7 @@
 	opacity: 0.6;
 }
 
-.modal__heading {
+.modal__title {
 	color: black;
 	margin: 0;
 	font-weight: 900;
@@ -116,7 +116,7 @@
 	opacity: 0.5;
 }
 
-.modal__error {
+.modal__input-error {
 	color: red;
 	font-size: 12px;
 	font-weight: 400;
@@ -133,7 +133,7 @@
 		left: auto;
 		bottom: calc(100% + 13.62px);
 	}
-	.modal__container {
+	.modal__content {
 		max-width: 282px;
 		min-height: 322px;
 		padding: 25px 22px;
@@ -156,7 +156,7 @@
 	box-sizing: border-box;
 }
 
-.modal__image {
+.modal__image-preview {
 	max-width: 75vw;
 	max-height: 75vh;
 }
@@ -170,6 +170,6 @@
 	color: #ffffff;
 }
 
-.modal__error_visible {
+.modal__input-error_visible {
 	color: red;
 }

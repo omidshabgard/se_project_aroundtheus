@@ -13,7 +13,7 @@
 	object-fit: cover;
 }
 
-.card__description {
+.card__info {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
