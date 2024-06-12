@@ -16,6 +16,7 @@ import {
 	profileTitleElem,
 	profileTitleInput,
 	selectors,
+	userInfo,
 } from './constants/app-data.js';
 import './pages/index.css';
 
@@ -58,8 +59,7 @@ const profileEditPopup = new PopupWithForm(
 
 function handleProfileFormSubmit(inputValues) {
 	const { name, about } = inputValues;
-	profileTitleElem.textContent = name;
-	profileDescriptionElem.textContent = about;
+	userInfo.setUserInfo(name, about);
 	profileEditPopup.close();
 }
 
@@ -68,8 +68,9 @@ profileEditButton.addEventListener(eventType.CLICK, openEditProfileModal);
 profileEditFormValidator.enableValidation();
 
 function openEditProfileModal() {
-	profileTitleInput.value = profileTitleElem.textContent;
-	profileDescriptionInput.value = profileDescriptionElem.textContent;
+	const { name, about } = userInfo.getUserInfo();
+	profileTitleInput.value = name;
+	profileDescriptionInput.value = about;
 	profileEditFormValidator.resetValidation();
 	profileEditPopup.open();
 }

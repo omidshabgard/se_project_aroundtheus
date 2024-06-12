@@ -1,3 +1,5 @@
+
+import UserInfo from '../components/UserInfo.js';
 export const initialCards = [
 	{
 		name: 'Yosemite Valley',
@@ -35,6 +37,7 @@ export const eventType = {
 
 export const selectors = {
 	profile: {
+		container: '.profile__info',
 		title: '.profile__title',
 		description: '.profile__description',
 		editButton: '.profile__edit-button',
@@ -116,4 +119,12 @@ export const profileEditForm = profileEditModal.querySelector(
 	selectors.modal.form
 );
 
-export const addNewCardForm = addNewCardModal.querySelector(selectors.modal.form);
+export const addNewCardForm = addNewCardModal.querySelector(
+	selectors.modal.form
+);
+
+export const userInfo = new UserInfo(
+	'Jacques Cousteau',
+	'Explorer',
+	selectors.profile.container
+);
