@@ -2,7 +2,8 @@ class Section {
 	constructor({ items, renderer }, cardContainerSelector) {
 		this._items = items;
 		this._renderer = renderer;
-		this._cardContainerSelector = cardContainerSelector;
+
+		this._container = document.querySelector(cardContainerSelector);
 	}
 
 	renderItems() {
@@ -12,8 +13,7 @@ class Section {
 	}
 
 	addItem(element) {
-		const container = document.querySelector(this._cardContainerSelector);
-		container.append(element);
+		this._container.prepend(element);
 	}
 }
 

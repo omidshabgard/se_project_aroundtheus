@@ -38,12 +38,12 @@ export default class Popup {
 				e.target.classList.contains('modal') ||
 				e.target.classList.contains('modal__close')
 			) {
-				this.close(e.currentTarget);
+				this.close();
 			}
 		});
 
-		this._popupCloseButon.addEventListener(eventType.CLICK, (e) => {
-			this.close();
-		});
+		// this._popupCloseButon.addEventListener(eventType.CLICK, (e) => {
+		// 	this.close();
+		// });
 	}
 }
