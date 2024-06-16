@@ -123,8 +123,3 @@ export const addNewCardForm = addNewCardModal.querySelector(
 	selectors.modal.form
 );
 
-export const userInfo = new UserInfo(
-	'Jacques Cousteau',
-	'Explorer',
-	selectors.profile.container
-);

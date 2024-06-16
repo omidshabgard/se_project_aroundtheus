@@ -13,11 +13,11 @@ export default class PopupWithForm extends Popup {
 		this._handleFormSubmit = handleFormSubmit;
 	}
 
-	close() {
+	// close() {
 		
 		
-		super.close();
-	}
+	// 	super.close();
+	// }
 
 	_getInputValues() {
 		const inputs = {};
