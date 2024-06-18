@@ -1,11 +1,12 @@
 import { selectors } from '../constants/app-data';
 
 class UserInfo {
+	
 	constructor(initialName, initialAbout, profileContainerSelector) {
-		this._name = initialName;
-		this._about = initialAbout;
+		this._name = "Jacques Cousteau";
+		this._about = "Explorer";
 		this._profileContainer = document.querySelector(
-			profileContainerSelector
+			selectors.profile.container
 		);
 		this._updateUI();
 	}
@@ -21,6 +22,7 @@ class UserInfo {
 			name: this._name,
 			about: this._about,
 		};
+		console.log("The ")
 	}
 
 	_updateUI() {
