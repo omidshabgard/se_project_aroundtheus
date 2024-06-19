@@ -3,7 +3,6 @@ import FormValidator from '../components/FormValidator.js';
 import PopupWithForm from '../components/PopoupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import Section from '../components/Section.js';
-// import UserInfo from '../constants/app-data.js';
 import UserInfo from '../components/UserInfo.js';
 import {
 	addNewCardButton,
@@ -21,7 +20,6 @@ import {
 } from '../constants/app-data.js';
 import '../pages/index.css';
 
-let userInfo = new UserInfo()
 // SECTION: CARD LIST
 
 const section = new Section(
@@ -71,20 +69,11 @@ profileEditButton.addEventListener(eventType.CLICK, openEditProfileModal);
 profileEditFormValidator.enableValidation();
 
 function openEditProfileModal() {
-	profileEditPopup.open();
 	const { name, about } = userInfo.getUserInfo();
-	console.log("The Data got ", name, about);
-	
-	// Setting default values if name or about is not set
-	if(!name){
-		profileTitleInput.value = "Jacques Cousteau";
-		profileDescriptionInput.value = "Explorer";
-	} else {
-		profileTitleInput.value = name;
-		profileDescriptionInput.value = about;
-	}
-	
+	profileTitleInput.value = name;
+	profileDescriptionInput.value = about;
 	profileEditFormValidator.resetValidation();
+	profileEditPopup.open();
 }
 
 // POPUP: CARD ADD FORM
@@ -117,3 +106,9 @@ function openCardAddModal() {
 // POPUP: IMAGE PREVIEW
 const cardPreviewPopup = new PopupWithImage(selectors.modal.image.modal);
 cardPreviewPopup.setEventListeners();
+
+const userInfo = new UserInfo(
+	'Jacques Cousteau',
+	'Explorer',
+	selectors.profile.container
+);

@@ -11,7 +11,6 @@ export default class Popup {
 
 	open() {
 		this._popupElement.classList.add('modal_opened');
-		console.log("Trying to open")
 		document.addEventListener(
 			eventType.KEY_DOWN,
 			this._closeByEscapeButton
