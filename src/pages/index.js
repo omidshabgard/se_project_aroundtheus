@@ -108,7 +108,7 @@ const cardPreviewPopup = new PopupWithImage(selectors.modal.image.modal);
 cardPreviewPopup.setEventListeners();
 
 const userInfo = new UserInfo(
-	'Jacques Cousteau',
-	'Explorer',
+	selectors.profile.title,
+	selectors.profile.description,
 	selectors.profile.container
 );
