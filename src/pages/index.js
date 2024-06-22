@@ -20,6 +20,11 @@ import {
 } from '../constants/app-data.js';
 import '../pages/index.css';
 
+const userInfo = new UserInfo({
+	nameSelector: selectors.profile.title,
+	jobSelector: selectors.profile.description,
+});
+
 // SECTION: CARD LIST
 
 const section = new Section(
@@ -60,7 +65,7 @@ const profileEditPopup = new PopupWithForm(
 
 function handleProfileFormSubmit(inputValues) {
 	const { name, about } = inputValues;
-	userInfo.setUserInfo(name, about);
+	userInfo.setUserInfo({ name, job: about });
 	profileEditPopup.close();
 }
 
@@ -69,9 +74,9 @@ profileEditButton.addEventListener(eventType.CLICK, openEditProfileModal);
 profileEditFormValidator.enableValidation();
 
 function openEditProfileModal() {
-	const { name, about } = userInfo.getUserInfo();
+	const { name, job } = userInfo.getUserInfo();
 	profileTitleInput.value = name;
-	profileDescriptionInput.value = about;
+	profileDescriptionInput.value = job;
 	profileEditFormValidator.resetValidation();
 	profileEditPopup.open();
 }
@@ -106,9 +111,3 @@ function openCardAddModal() {
 // POPUP: IMAGE PREVIEW
 const cardPreviewPopup = new PopupWithImage(selectors.modal.image.modal);
 cardPreviewPopup.setEventListeners();
-
-const userInfo = new UserInfo(
-	selectors.profile.title,
-	selectors.profile.description,
-	selectors.profile.container
-);

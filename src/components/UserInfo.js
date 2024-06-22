@@ -1,36 +1,21 @@
 import { selectors } from '../constants/app-data';
 
 class UserInfo {
-	constructor(initialName, initialAbout, profileContainerSelector) {
-		this._name = document.querySelector(initialName);
-		this._about = document.querySelector(initialAbout);
-		this._profileContainer = document.querySelector(
-			profileContainerSelector
-		);
-		this._updateUI();
-	}
-
-	setUserInfo(newName, newAbout) {
-		this._name = newName;
-		this._about = newAbout;
-		this._updateUI();
+	constructor({ nameSelector, jobSelector }) {
+		this._nameElement = document.querySelector(nameSelector);
+		this._jobElement = document.querySelector(jobSelector);
 	}
 
 	getUserInfo() {
 		return {
-			name: this._name.textContent,
-			about: this._about.textContent,
+			name: this._nameElement.textContent,
+			job: this._jobElement.textContent,
 		};
 	}
 
-	_updateUI() {
-		this._profileContainer.querySelector(
-			selectors.profile.title
-		).textContent = this._name.textContent;
-
-		this._profileContainer.querySelector(
-			selectors.profile.description
-		).textContent = this._about.textContent;
+	setUserInfo({ name, job }) {
+		this._nameElement.textContent = name;
+		this._jobElement.textContent = job;
 	}
 }
 
