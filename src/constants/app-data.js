@@ -1,32 +1,3 @@
-
-import UserInfo from '../components/UserInfo.js';
-export const initialCards = [
-	{
-		name: 'Yosemite Valley',
-		url: 'https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg',
-	},
-	{
-		name: 'Lake Louise',
-		url: 'https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg',
-	},
-	{
-		name: 'Bald Mountains',
-		url: 'https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg',
-	},
-	{
-		name: 'Latemar',
-		url: 'https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg',
-	},
-	{
-		name: 'Vanoise National Park',
-		url: 'https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg',
-	},
-	{
-		name: 'Lago di Braies',
-		url: 'https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg',
-	},
-];
-
 export const eventType = {
 	CLICK: 'click',
 	SUBMIT: 'submit',
@@ -39,7 +10,9 @@ export const selectors = {
 	profile: {
 		container: '.profile__info',
 		title: '.profile__title',
-		description: '.profile__description',
+		about: '.profile__about',
+		avatar: '.profile__avatar',
+		avatarSection: '.profile__avatar-section',
 		editButton: '.profile__edit-button',
 		addButton: '.profile__add-button',
 	},
@@ -59,9 +32,16 @@ export const selectors = {
 		profileEdit: {
 			modal: '#profile-edit-modal',
 			titleInput: '#profile-title-input',
-			descriptionInput: '#profile-description-input',
+			aboutInput: '#profile-about-input',
 			titleInputError: '#profile-title-input-error',
-			descriptionInputError: '#profile-description-input-error',
+			aboutInputError: '#profile-about-input-error',
+		},
+		deleteConfirmation: {
+			modal: '#delete-confirmation-modal',
+		},
+		profilePic: {
+			modal: '#profile-pic-modal',
+			profilePicInput: '#profile-pic-input',
 		},
 		cardAdd: {
 			modal: '#card-add-modal',
@@ -73,6 +53,7 @@ export const selectors = {
 			preview: '.modal__image-preview',
 			caption: '.modal__caption',
 		},
+		button: '.modal__button',
 		close: '.modal__close',
 		form: '.modal__form',
 		input: '.modal__input',
@@ -98,13 +79,15 @@ export const profileEditButton = document.querySelector(
 export const profileTitleInput = document.querySelector(
 	selectors.modal.profileEdit.titleInput
 );
-export const profileDescriptionInput = document.querySelector(
-	selectors.modal.profileEdit.descriptionInput
+export const profileAboutInput = document.querySelector(
+	selectors.modal.profileEdit.aboutInput
 );
 
 export const profileTitleElem = document.querySelector(selectors.profile.title);
-export const profileDescriptionElem = document.querySelector(
-	selectors.profile.description
+export const profileAboutElem = document.querySelector(selectors.profile.about);
+
+export const avatarElem = document.querySelector(
+	selectors.profile.avatar + ', ' + selectors.profile.avatarSection
 );
 
 export const addNewCardModal = document.querySelector(
@@ -123,3 +106,11 @@ export const addNewCardForm = addNewCardModal.querySelector(
 	selectors.modal.form
 );
 
+const AUTHORIZATION = '9843ab97-45b7-4d5b-9906-4067b257c6ed';
+const CONTENT_TYPE = 'application/json';
+
+export const BASE_URL = 'https://around-api.en.tripleten-services.com/v1';
+export const HEADERS = {
+	authorization: AUTHORIZATION,
+	'Content-Type': CONTENT_TYPE,
+};

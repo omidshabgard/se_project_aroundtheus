@@ -13,12 +13,6 @@ export default class PopupWithForm extends Popup {
 		this._handleFormSubmit = handleFormSubmit;
 	}
 
-	// close() {
-		
-		
-	// 	super.close();
-	// }
-
 	_getInputValues() {
 		const inputs = {};
 		this._formInputs.forEach((input) => {

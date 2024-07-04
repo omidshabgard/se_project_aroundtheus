@@ -1,3 +1,4 @@
+import Api from '../components/Api.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import PopupWithForm from '../components/PopoupWithForm.js';
@@ -5,31 +6,39 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
 import {
+	BASE_URL,
+	HEADERS,
 	addNewCardButton,
 	addNewCardForm,
 	configValidation,
 	eventType,
-	initialCards,
-	profileDescriptionElem,
-	profileDescriptionInput,
+	profileAboutInput,
+	avatarElem,
 	profileEditButton,
 	profileEditForm,
-	profileTitleElem,
 	profileTitleInput,
 	selectors,
 } from '../constants/app-data.js';
 import '../pages/index.css';
 
-const userInfo = new UserInfo({
-	nameSelector: selectors.profile.title,
-	jobSelector: selectors.profile.description,
+
+// --------------------------------------------------------------//
+// Variable definitions -----------------------------------------//
+// --------------------------------------------------------------//
+
+export const api = new Api({
+	baseUrl: BASE_URL,
+	headers: HEADERS,
 });
 
-// SECTION: CARD LIST
+const userInfo = new UserInfo({
+	nameSelector: selectors.profile.title,
+	aboutSelector: selectors.profile.about,
+	avatarSelector: selectors.profile.avatar,
+});
 
 const section = new Section(
 	{
-		items: initialCards,
 		renderer: (cardData) => {
 			const cardElement = renderCard(cardData);
 			section.addItem(cardElement);
@@ -38,7 +47,60 @@ const section = new Section(
 	selectors.gallery.list
 );
 
-section.renderItems();
+const profileEditFormValidator = new FormValidator(
+	configValidation,
+	profileEditForm
+);
+const profileEditPopup = new PopupWithForm(
+	selectors.modal.profileEdit.modal,
+	handleProfileFormSubmit
+);
+
+const avatarEditPopup = new PopupWithForm(
+	selectors.modal.profilePic.modal,
+	handleAvatarEdit
+);
+
+const addNewCardFormValidator = new FormValidator(
+	configValidation,
+	addNewCardForm
+);
+
+const addNewCardPopup = new PopupWithForm(
+	selectors.modal.cardAdd.modal,
+	handleNewCardSubmit
+);
+
+const cardPreviewPopup = new PopupWithImage(selectors.modal.image.modal);
+
+// --------------------------------------------------------------//
+// Code flow--------- -------------------------------------------//
+// --------------------------------------------------------------//
+
+api.getUserInfoAndCards().then(([userData, initialCards]) => {
+	userInfo.setUserInfo(userData);
+	section.renderItems(initialCards);
+});
+
+profileEditPopup.setEventListeners();
+avatarEditPopup.setEventListeners();
+addNewCardPopup.setEventListeners();
+cardPreviewPopup.setEventListeners();
+
+profileEditButton.addEventListener(eventType.CLICK, openEditProfileModal);
+avatarElem.addEventListener(eventType.CLICK, openProfilePicModal);
+addNewCardButton.addEventListener(eventType.CLICK, openCardAddModal);
+
+profileEditFormValidator.enableValidation();
+addNewCardFormValidator.enableValidation();
+
+// --------------------------------------------------------------//
+// Reusable functions -------------------------------------------//
+// --------------------------------------------------------------//
+function openCardAddModal() {
+	addNewCardFormValidator.resetValidation();
+	addNewCardPopup.open();
+}
 
 function handleCardPreviewClick(caption, imageUrl) {
 	cardPreviewPopup.open(caption, imageUrl);
@@ -53,61 +115,38 @@ function renderCard(cardData) {
 	return card.getView();
 }
 
-// POPUP: PROFILE EDIT FORM
-const profileEditFormValidator = new FormValidator(
-	configValidation,
-	profileEditForm
-);
-const profileEditPopup = new PopupWithForm(
-	selectors.modal.profileEdit.modal,
-	handleProfileFormSubmit
-);
-
 function handleProfileFormSubmit(inputValues) {
 	const { name, about } = inputValues;
-	userInfo.setUserInfo({ name, job: about });
-	profileEditPopup.close();
+	api.editUserInfo({ name, about }).then((userData) => {
+		userInfo.setUserInfo(userData);
+		profileEditPopup.close();
+	});
 }
 
-profileEditPopup.setEventListeners();
-profileEditButton.addEventListener(eventType.CLICK, openEditProfileModal);
-profileEditFormValidator.enableValidation();
+function openProfilePicModal() {
+	avatarEditPopup.open();
+}
+
+function handleAvatarEdit(inputValues) {
+	const { avatar } = inputValues;
+	api.editUserAvatar({ avatar }).then((userData) => {
+		userInfo.setUserInfo(userData);
+		avatarEditPopup.close();
+	});
+}
 
 function openEditProfileModal() {
-	const { name, job } = userInfo.getUserInfo();
+	const { name, about } = userInfo.getUserInfo();
 	profileTitleInput.value = name;
-	profileDescriptionInput.value = job;
+	profileAboutInput.value = about;
 	profileEditFormValidator.resetValidation();
 	profileEditPopup.open();
 }
 
-// POPUP: CARD ADD FORM
-const addNewCardFormValidator = new FormValidator(
-	configValidation,
-	addNewCardForm
-);
-
-const addNewCardPopup = new PopupWithForm(
-	selectors.modal.cardAdd.modal,
-	handleNewCardSubmit
-);
-
 function handleNewCardSubmit(inputValues) {
-	const { name, url } = inputValues;
-	const newElementData = renderCard({ name, url });
-	section.addItem(newElementData);
-	addNewCardPopup.close();
+	api.addCard(inputValues).then((cardData) => {
+		const newCard = renderCard(cardData);
+		section.addItem(newCard);
+		addNewCardPopup.close();
+	});
 }
-
-addNewCardPopup.setEventListeners();
-addNewCardButton.addEventListener(eventType.CLICK, openCardAddModal);
-addNewCardFormValidator.enableValidation();
-
-function openCardAddModal() {
-	addNewCardFormValidator.resetValidation();
-	addNewCardPopup.open();
-}
-
-// POPUP: IMAGE PREVIEW
-const cardPreviewPopup = new PopupWithImage(selectors.modal.image.modal);
-cardPreviewPopup.setEventListeners();

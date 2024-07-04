@@ -41,9 +41,5 @@ export default class Popup {
 				this.close();
 			}
 		});
-
-		// this._popupCloseButon.addEventListener(eventType.CLICK, (e) => {
-		// 	this.close();
-		// });
 	}
 }
