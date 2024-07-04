@@ -10,17 +10,18 @@ import {
 	HEADERS,
 	addNewCardButton,
 	addNewCardForm,
+	avatarEditForm,
+	avatarElem,
+	avatarInput,
 	configValidation,
 	eventType,
 	profileAboutInput,
-	avatarElem,
 	profileEditButton,
 	profileEditForm,
 	profileTitleInput,
 	selectors,
 } from '../constants/app-data.js';
 import '../pages/index.css';
-
 
 // --------------------------------------------------------------//
 // Variable definitions -----------------------------------------//
@@ -47,18 +48,24 @@ const section = new Section(
 	selectors.gallery.list
 );
 
-const profileEditFormValidator = new FormValidator(
-	configValidation,
-	profileEditForm
-);
 const profileEditPopup = new PopupWithForm(
 	selectors.modal.profileEdit.modal,
 	handleProfileFormSubmit
 );
 
 const avatarEditPopup = new PopupWithForm(
-	selectors.modal.profilePic.modal,
-	handleAvatarEdit
+	selectors.modal.avatar.modal,
+	handleAvatarEditSubmit
+);
+
+const addNewCardPopup = new PopupWithForm(
+	selectors.modal.cardAdd.modal,
+	handleNewCardSubmit
+);
+
+const profileEditFormValidator = new FormValidator(
+	configValidation,
+	profileEditForm
 );
 
 const addNewCardFormValidator = new FormValidator(
@@ -66,9 +73,9 @@ const addNewCardFormValidator = new FormValidator(
 	addNewCardForm
 );
 
-const addNewCardPopup = new PopupWithForm(
-	selectors.modal.cardAdd.modal,
-	handleNewCardSubmit
+const avatarEditFormValidator = new FormValidator(
+	configValidation,
+	avatarEditForm
 );
 
 const cardPreviewPopup = new PopupWithImage(selectors.modal.image.modal);
@@ -88,11 +95,12 @@ addNewCardPopup.setEventListeners();
 cardPreviewPopup.setEventListeners();
 
 profileEditButton.addEventListener(eventType.CLICK, openEditProfileModal);
-avatarElem.addEventListener(eventType.CLICK, openProfilePicModal);
 addNewCardButton.addEventListener(eventType.CLICK, openCardAddModal);
+avatarElem.addEventListener(eventType.CLICK, openProfilePicModal);
 
 profileEditFormValidator.enableValidation();
 addNewCardFormValidator.enableValidation();
+avatarEditFormValidator.enableValidation();
 
 // --------------------------------------------------------------//
 // Reusable functions -------------------------------------------//
@@ -102,37 +110,11 @@ function openCardAddModal() {
 	addNewCardPopup.open();
 }
 
-function handleCardPreviewClick(caption, imageUrl) {
-	cardPreviewPopup.open(caption, imageUrl);
-}
-
-function renderCard(cardData) {
-	const card = new Card(
-		cardData,
-		selectors.cardTemplate.template,
-		handleCardPreviewClick
-	);
-	return card.getView();
-}
-
-function handleProfileFormSubmit(inputValues) {
-	const { name, about } = inputValues;
-	api.editUserInfo({ name, about }).then((userData) => {
-		userInfo.setUserInfo(userData);
-		profileEditPopup.close();
-	});
-}
-
 function openProfilePicModal() {
+	const { avatar } = userInfo.getUserInfo();
+	avatarInput.value = avatar;
+	avatarEditFormValidator.resetValidation();
 	avatarEditPopup.open();
-}
-
-function handleAvatarEdit(inputValues) {
-	const { avatar } = inputValues;
-	api.editUserAvatar({ avatar }).then((userData) => {
-		userInfo.setUserInfo(userData);
-		avatarEditPopup.close();
-	});
 }
 
 function openEditProfileModal() {
@@ -143,10 +125,66 @@ function openEditProfileModal() {
 	profileEditPopup.open();
 }
 
+function handleCardPreviewClick(caption, imageUrl) {
+	cardPreviewPopup.open(caption, imageUrl);
+}
+
+function handleProfileFormSubmit(inputValues) {
+	const { name, about } = inputValues;
+	const submitButtonElem = profileEditForm.querySelector(
+		selectors.modal.button
+	);
+	const oldButtonLabel = submitButtonElem.textContent;
+	submitButtonElem.textContent = 'Saving...';
+	api.editUserInfo({ name, about })
+		.then((userData) => {
+			userInfo.setUserInfo(userData);
+			profileEditPopup.close();
+		})
+		.finally(() => {
+			submitButtonElem.textContent = oldButtonLabel;
+		});
+}
+
 function handleNewCardSubmit(inputValues) {
-	api.addCard(inputValues).then((cardData) => {
-		const newCard = renderCard(cardData);
-		section.addItem(newCard);
-		addNewCardPopup.close();
-	});
+	const submitButtonElem = addNewCardForm.querySelector(
+		selectors.modal.button
+	);
+	const oldButtonLabel = submitButtonElem.textContent;
+	submitButtonElem.textContent = 'Saving...';
+	api.addCard(inputValues)
+		.then((cardData) => {
+			const newCard = renderCard(cardData);
+			section.addItem(newCard);
+			addNewCardPopup.close();
+		})
+		.finally(() => {
+			submitButtonElem.textContent = oldButtonLabel;
+		});
+}
+
+function handleAvatarEditSubmit(inputValues) {
+	const { avatar } = inputValues;
+	const submitButtonElem = avatarEditForm.querySelector(
+		selectors.modal.button
+	);
+	const oldButtonLabel = submitButtonElem.textContent;
+	submitButtonElem.textContent = 'Saving...';
+	api.editUserAvatar({ avatar })
+		.then((userData) => {
+			userInfo.setUserInfo(userData);
+			avatarEditPopup.close();
+		})
+		.finally(() => {
+			submitButtonElem.textContent = oldButtonLabel;
+		});
+}
+
+function renderCard(cardData) {
+	const card = new Card(
+		cardData,
+		selectors.cardTemplate.template,
+		handleCardPreviewClick
+	);
+	return card.getView();
 }

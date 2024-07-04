@@ -35,23 +35,28 @@ export const selectors = {
 			aboutInput: '#profile-about-input',
 			titleInputError: '#profile-title-input-error',
 			aboutInputError: '#profile-about-input-error',
+			submitButton: '#profile-edit-modal .modal__button',
 		},
 		deleteConfirmation: {
 			modal: '#delete-confirmation-modal',
+			submitButton: '#delete-confirmation-modal .modal__button',
 		},
-		profilePic: {
-			modal: '#profile-pic-modal',
-			profilePicInput: '#profile-pic-input',
+		avatar: {
+			modal: '#avatar-modal',
+			avatarInput: '#avatar-input',
+			submitButton: '#avatar-modal .modal__button',
 		},
 		cardAdd: {
 			modal: '#card-add-modal',
 			titleInputError: '#card-title-input-error',
 			urlInputError: '#card-url-input-error',
+			submitButton: '#card-add-modal .modal__button',
 		},
 		image: {
 			modal: '#image-modal',
 			preview: '.modal__image-preview',
 			caption: '.modal__caption',
+			submitButton: '#image-modal .modal__button',
 		},
 		button: '.modal__button',
 		close: '.modal__close',
@@ -72,6 +77,15 @@ export const configValidation = {
 export const profileEditModal = document.querySelector(
 	selectors.modal.profileEdit.modal
 );
+
+export const addNewCardModal = document.querySelector(
+	selectors.modal.cardAdd.modal
+);
+
+export const avatarEditModal = document.querySelector(
+	selectors.modal.avatar.modal
+);
+
 export const profileEditButton = document.querySelector(
 	selectors.profile.editButton
 );
@@ -82,16 +96,14 @@ export const profileTitleInput = document.querySelector(
 export const profileAboutInput = document.querySelector(
 	selectors.modal.profileEdit.aboutInput
 );
+export const avatarInput = document.querySelector(
+	selectors.modal.avatar.avatarInput
+);
 
 export const profileTitleElem = document.querySelector(selectors.profile.title);
 export const profileAboutElem = document.querySelector(selectors.profile.about);
-
 export const avatarElem = document.querySelector(
 	selectors.profile.avatar + ', ' + selectors.profile.avatarSection
-);
-
-export const addNewCardModal = document.querySelector(
-	selectors.modal.cardAdd.modal
 );
 
 export const addNewCardButton = document.querySelector(
@@ -103,6 +115,10 @@ export const profileEditForm = profileEditModal.querySelector(
 );
 
 export const addNewCardForm = addNewCardModal.querySelector(
+	selectors.modal.form
+);
+
+export const avatarEditForm = avatarEditModal.querySelector(
 	selectors.modal.form
 );
 
