@@ -2,6 +2,7 @@ import Api from '../components/Api.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import PopupWithForm from '../components/PopoupWithForm.js';
+import PopupDelete from '../components/PopupDelete.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
@@ -63,6 +64,10 @@ const addNewCardPopup = new PopupWithForm(
 	handleNewCardSubmit
 );
 
+const deleteConfirmationPopup = new PopupDelete(
+	selectors.modal.deleteConfirmation.modal
+);
+
 const profileEditFormValidator = new FormValidator(
 	configValidation,
 	profileEditForm
@@ -93,6 +98,7 @@ profileEditPopup.setEventListeners();
 avatarEditPopup.setEventListeners();
 addNewCardPopup.setEventListeners();
 cardPreviewPopup.setEventListeners();
+deleteConfirmationPopup.setEventListeners();
 
 profileEditButton.addEventListener(eventType.CLICK, openEditProfileModal);
 addNewCardButton.addEventListener(eventType.CLICK, openCardAddModal);
@@ -140,6 +146,7 @@ function handleProfileFormSubmit(inputValues) {
 		.then((userData) => {
 			userInfo.setUserInfo(userData);
 			profileEditPopup.close();
+			profileEditForm.resetValidation();
 		})
 		.finally(() => {
 			submitButtonElem.textContent = oldButtonLabel;
@@ -157,6 +164,7 @@ function handleNewCardSubmit(inputValues) {
 			const newCard = renderCard(cardData);
 			section.addItem(newCard);
 			addNewCardPopup.close();
+			addNewCardForm.resetValidation();
 		})
 		.finally(() => {
 			submitButtonElem.textContent = oldButtonLabel;
@@ -174,17 +182,31 @@ function handleAvatarEditSubmit(inputValues) {
 		.then((userData) => {
 			userInfo.setUserInfo(userData);
 			avatarEditPopup.close();
+			avatarEditForm.resetValidation();
 		})
 		.finally(() => {
 			submitButtonElem.textContent = oldButtonLabel;
 		});
 }
 
+function handleDeleteCard(cardId, cardElement) {
+	api.removeCard(cardId).then(() => {
+		cardElement.remove();
+		cardElement = null;
+		deleteConfirmationPopup.close();
+	});
+}
+
 function renderCard(cardData) {
 	const card = new Card(
 		cardData,
 		selectors.cardTemplate.template,
-		handleCardPreviewClick
+		handleCardPreviewClick,
+		openDeleteCardPopup
 	);
 	return card.getView();
+}
+
+function openDeleteCardPopup(cardId, cardElement) {
+	deleteConfirmationPopup.open(() => handleDeleteCard(cardId, cardElement));
 }

@@ -9,6 +9,11 @@ export default class PopupDelete extends Popup {
 		);
 	}
 
+	open(deleteHandler) {
+		this._deleteHandler = deleteHandler;
+		super.open();
+	}
+
 	close() {
 		this._formElement.removeEventListener(
 			eventType.SUBMIT,
@@ -17,9 +22,16 @@ export default class PopupDelete extends Popup {
 		super.close();
 	}
 
-	setEventListeners(deleteHandler) {
+	_submitForm(e) {
+		e.preventDefault();
+		this._deleteHandler();
+	}
+
+	setEventListeners() {
 		super.setEventListeners();
-		this._deleteHandler = deleteHandler;
-		this._formElement.addEventListener(eventType.SUBMIT, deleteHandler);
+		this._formElement.addEventListener(
+			eventType.SUBMIT,
+			this._submitForm.bind(this)
+		);
 	}
 }

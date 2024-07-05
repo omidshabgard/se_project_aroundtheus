@@ -1,24 +1,14 @@
-import {
-	BASE_URL,
-	HEADERS,
-	eventType,
-	selectors,
-} from '../constants/app-data.js';
-import Api from './Api.js';
-import PopupDelete from './PopupDelete.js';
+import { eventType, selectors } from '../constants/app-data.js';
 
-export const api = new Api({
-	baseUrl: BASE_URL,
-	headers: HEADERS,
-});
 class Card {
-	constructor(data, cardSelector, handleImageClick) {
+	constructor(data, cardSelector, handleImageClick, handleDeleteClick) {
 		this._name = data.name;
 		this._link = data.link;
 		this._id = data._id;
 		this._isLiked = data.isLiked;
 		this._cardSelector = cardSelector;
 		this._handleImageClick = handleImageClick;
+		this._handleDeleteClick = handleDeleteClick;
 	}
 
 	_handleImagePreview() {
@@ -94,20 +84,7 @@ class Card {
 	}
 
 	_handleDeleteButton() {
-		const deleteHandler = (e) => {
-			e.preventDefault();
-			api.removeCard(this._id).then(() => {
-				this._cardElement.remove();
-				this._cardElement = null;
-				deleteConfirmationPopup.close();
-			});
-		};
-		const deleteConfirmationPopup = new PopupDelete(
-			selectors.modal.deleteConfirmation.modal,
-			selectors.modal.button
-		);
-		deleteConfirmationPopup.setEventListeners(deleteHandler);
-		deleteConfirmationPopup.open();
+		this._handleDeleteClick(this._id, this._cardElement);
 	}
 }
 
