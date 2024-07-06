@@ -197,12 +197,22 @@ function handleDeleteCard(cardId, cardElement) {
 	});
 }
 
+function handleLikeClick(cardId) {
+	return api.likeCard(cardId);
+}
+
+function handleDislikeClick(cardId) {
+	return api.dislikeCard(cardId);
+}
+
 function renderCard(cardData) {
 	const card = new Card(
 		cardData,
 		selectors.cardTemplate.template,
 		handleCardPreviewClick,
-		openDeleteCardPopup
+		openDeleteCardPopup,
+		handleLikeClick,
+		handleDislikeClick
 	);
 	return card.getView();
 }

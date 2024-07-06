@@ -1,7 +1,14 @@
 import { eventType, selectors } from '../constants/app-data.js';
 
 class Card {
-	constructor(data, cardSelector, handleImageClick, handleDeleteClick) {
+	constructor(
+		data,
+		cardSelector,
+		handleImageClick,
+		handleDeleteClick,
+		handleLikeClick,
+		handleDislikeClick
+	) {
 		this._name = data.name;
 		this._link = data.link;
 		this._id = data._id;
@@ -9,6 +16,8 @@ class Card {
 		this._cardSelector = cardSelector;
 		this._handleImageClick = handleImageClick;
 		this._handleDeleteClick = handleDeleteClick;
+		this._handleLikeClick = handleLikeClick;
+		this._handleDislikeClick = handleDislikeClick;
 	}
 
 	_handleImagePreview() {
@@ -73,11 +82,11 @@ class Card {
 		const isCardLiked = element.classList.contains(likeClass);
 
 		if (isCardLiked) {
-			api.dislikeCard(this._id).then(() => {
+			this._handleDislikeClick(this._id).then(() => {
 				element.classList.remove(likeClass);
 			});
 		} else {
-			api.likeCard(this._id).then(() => {
+			this._handleLikeClick(this._id).then(() => {
 				element.classList.add(likeClass);
 			});
 		}
