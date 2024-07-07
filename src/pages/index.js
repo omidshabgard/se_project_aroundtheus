@@ -141,64 +141,46 @@ function handleCardPreviewClick(caption, imageUrl) {
 
 function handleProfileFormSubmit(inputValues) {
 	const { name, about } = inputValues;
-	const submitButtonElem = profileEditForm.querySelector(
-		selectors.modal.button
-	);
-	const oldButtonLabel = submitButtonElem.textContent;
-	submitButtonElem.textContent = 'Saving...';
+	profileEditPopup.renderLoading(true);
 	api.editUserInfo({ name, about })
 		.then((userData) => {
 			userInfo.setUserInfo(userData);
 			profileEditPopup.close();
 			profileEditFormValidator.resetValidation();
+			profileEditPopup.renderLoading(false);
 		})
 		.catch((err) => {
 			console.error(err);
-		})
-		.finally(() => {
-			submitButtonElem.textContent = oldButtonLabel;
 		});
 }
 
 function handleNewCardSubmit(inputValues) {
-	const submitButtonElem = addNewCardForm.querySelector(
-		selectors.modal.button
-	);
-	const oldButtonLabel = submitButtonElem.textContent;
-	submitButtonElem.textContent = 'Saving...';
+	addNewCardPopup.renderLoading(true);
 	api.addCard(inputValues)
 		.then((cardData) => {
 			const newCard = renderCard(cardData);
 			section.addItem(newCard);
 			addNewCardPopup.close();
 			addNewCardFormValidator.resetValidation();
+			addNewCardPopup.renderLoading(false);
 		})
 		.catch((err) => {
 			console.error(err);
-		})
-		.finally(() => {
-			submitButtonElem.textContent = oldButtonLabel;
 		});
 }
 
 function handleAvatarEditSubmit(inputValues) {
 	const { avatar } = inputValues;
-	const submitButtonElem = avatarEditForm.querySelector(
-		selectors.modal.button
-	);
-	const oldButtonLabel = submitButtonElem.textContent;
-	submitButtonElem.textContent = 'Saving...';
+	avatarEditPopup.renderLoading(true);
 	api.editUserAvatar({ avatar })
 		.then((userData) => {
 			userInfo.setUserInfo(userData);
 			avatarEditPopup.close();
 			avatarEditFormValidator.resetValidation();
+			avatarEditPopup.renderLoading(false);
 		})
 		.catch((err) => {
 			console.error(err);
-		})
-		.finally(() => {
-			submitButtonElem.textContent = oldButtonLabel;
 		});
 }
 
