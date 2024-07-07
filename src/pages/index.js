@@ -89,10 +89,14 @@ const cardPreviewPopup = new PopupWithImage(selectors.modal.image.modal);
 // Code flow--------- -------------------------------------------//
 // --------------------------------------------------------------//
 
-api.getUserInfoAndCards().then(([userData, initialCards]) => {
-	userInfo.setUserInfo(userData);
-	section.renderItems(initialCards);
-});
+api.getUserInfoAndCards()
+	.then(([userData, initialCards]) => {
+		userInfo.setUserInfo(userData);
+		section.renderItems(initialCards);
+	})
+	.catch((err) => {
+		console.error(err);
+	});
 
 profileEditPopup.setEventListeners();
 avatarEditPopup.setEventListeners();
@@ -146,7 +150,10 @@ function handleProfileFormSubmit(inputValues) {
 		.then((userData) => {
 			userInfo.setUserInfo(userData);
 			profileEditPopup.close();
-			profileEditForm.resetValidation();
+			profileEditFormValidator.resetValidation();
+		})
+		.catch((err) => {
+			console.error(err);
 		})
 		.finally(() => {
 			submitButtonElem.textContent = oldButtonLabel;
@@ -164,7 +171,10 @@ function handleNewCardSubmit(inputValues) {
 			const newCard = renderCard(cardData);
 			section.addItem(newCard);
 			addNewCardPopup.close();
-			addNewCardForm.resetValidation();
+			addNewCardFormValidator.resetValidation();
+		})
+		.catch((err) => {
+			console.error(err);
 		})
 		.finally(() => {
 			submitButtonElem.textContent = oldButtonLabel;
@@ -182,7 +192,10 @@ function handleAvatarEditSubmit(inputValues) {
 		.then((userData) => {
 			userInfo.setUserInfo(userData);
 			avatarEditPopup.close();
-			avatarEditForm.resetValidation();
+			avatarEditFormValidator.resetValidation();
+		})
+		.catch((err) => {
+			console.error(err);
 		})
 		.finally(() => {
 			submitButtonElem.textContent = oldButtonLabel;
@@ -190,11 +203,15 @@ function handleAvatarEditSubmit(inputValues) {
 }
 
 function handleDeleteCard(cardId, cardElement) {
-	api.removeCard(cardId).then(() => {
-		cardElement.remove();
-		cardElement = null;
-		deleteConfirmationPopup.close();
-	});
+	api.removeCard(cardId)
+		.then(() => {
+			cardElement.remove();
+			cardElement = null;
+			deleteConfirmationPopup.close();
+		})
+		.catch((err) => {
+			console.error(err);
+		});
 }
 
 function handleLikeClick(cardId) {

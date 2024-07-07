@@ -9,16 +9,12 @@ class Api {
 			method,
 			headers: this._headers,
 			body: JSON.stringify(body),
-		})
-			.then((res) => {
-				if (res.ok) {
-					return res.json();
-				}
-				return Promise.reject(`Error: ${res}`);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
+		}).then((res) => {
+			if (res.ok) {
+				return res.json();
+			}
+			return Promise.reject(`Error: ${res}`);
+		});
 	}
 
 	// GET /cards – Get all cards
