@@ -1,15 +1,27 @@
 import { eventType, selectors } from '../constants/app-data.js';
 
 class Card {
-	constructor(data, cardSelector, handleImageClick) {
+	constructor(
+		data,
+		cardSelector,
+		handleImageClick,
+		handleDeleteClick,
+		handleLikeClick,
+		handleDislikeClick
+	) {
 		this._name = data.name;
-		this._url = data.url;
+		this._link = data.link;
+		this._id = data._id;
+		this._isLiked = data.isLiked;
 		this._cardSelector = cardSelector;
 		this._handleImageClick = handleImageClick;
+		this._handleDeleteClick = handleDeleteClick;
+		this._handleLikeClick = handleLikeClick;
+		this._handleDislikeClick = handleDislikeClick;
 	}
 
 	_handleImagePreview() {
-		return this._handleImageClick(this._name, this._url);
+		return this._handleImageClick(this._name, this._link);
 	}
 
 	_setEventListeners() {
@@ -47,23 +59,45 @@ class Card {
 		).textContent = this._name;
 
 		// add image to the card
-
 		const imageElement = this._cardElement.querySelector(
 			selectors.cardTemplate.image
 		);
-		imageElement.src = this._url;
+		imageElement.src = this._link;
 		imageElement.alt = this._name;
+
+		//fill like button
+		const likeButtonElement = this._cardElement.querySelector(
+			selectors.cardTemplate.likeButton
+		);
+		if (this._isLiked) {
+			likeButtonElement.classList.add('card__like-button_active');
+		}
 
 		this._setEventListeners();
 		return this._cardElement;
 	}
 
 	_handleLikeButton(element) {
-		element.classList.toggle('card__like-button_active');
+		const likeClass = 'card__like-button_active';
+		const isCardLiked = element.classList.contains(likeClass);
+
+		if (isCardLiked) {
+			this._handleDislikeClick(this._id)
+				.then(() => {
+					element.classList.remove(likeClass);
+				})
+				.catch((error) => console.log(error));
+		} else {
+			this._handleLikeClick(this._id)
+				.then(() => {
+					element.classList.add(likeClass);
+				})
+				.catch((error) => console.log(error));
+		}
 	}
+
 	_handleDeleteButton() {
-		this._cardElement.remove();
-		this._cardElement = null;
+		this._handleDeleteClick(this._id, this._cardElement);
 	}
 }
 
