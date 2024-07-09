@@ -82,13 +82,17 @@ class Card {
 		const isCardLiked = element.classList.contains(likeClass);
 
 		if (isCardLiked) {
-			this._handleDislikeClick(this._id).then(() => {
-				element.classList.remove(likeClass);
-			});
+			this._handleDislikeClick(this._id)
+				.then(() => {
+					element.classList.remove(likeClass);
+				})
+				.catch((error) => console.log(error));
 		} else {
-			this._handleLikeClick(this._id).then(() => {
-				element.classList.add(likeClass);
-			});
+			this._handleLikeClick(this._id)
+				.then(() => {
+					element.classList.add(likeClass);
+				})
+				.catch((error) => console.log(error));
 		}
 	}
 

@@ -147,10 +147,13 @@ function handleProfileFormSubmit(inputValues) {
 			userInfo.setUserInfo(userData);
 			profileEditPopup.close();
 			profileEditFormValidator.resetValidation();
-			profileEditPopup.renderLoading(false);
+			profileEditPopup.clearInputs();
 		})
 		.catch((err) => {
 			console.error(err);
+		})
+		.finally(() => {
+			profileEditPopup.renderLoading(false);
 		});
 }
 
@@ -162,10 +165,13 @@ function handleNewCardSubmit(inputValues) {
 			section.addItem(newCard);
 			addNewCardPopup.close();
 			addNewCardFormValidator.resetValidation();
-			addNewCardPopup.renderLoading(false);
+			addNewCardPopup.clearInputs();
 		})
 		.catch((err) => {
 			console.error(err);
+		})
+		.finally(() => {
+			addNewCardPopup.renderLoading(false);
 		});
 }
 
@@ -177,10 +183,12 @@ function handleAvatarEditSubmit(inputValues) {
 			userInfo.setUserInfo(userData);
 			avatarEditPopup.close();
 			avatarEditFormValidator.resetValidation();
-			avatarEditPopup.renderLoading(false);
 		})
 		.catch((err) => {
 			console.error(err);
+		})
+		.finally(() => {
+			avatarEditPopup.renderLoading(false);
 		});
 }
 
